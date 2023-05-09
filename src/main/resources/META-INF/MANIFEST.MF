@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Title: MossFrpAttackTest
-Implementation-Version: MossFrpAttackTest
+Implementation-Title: MossTwitterRandom
+Implementation-Version: MossTwitterRandom
 Implementation-Vendor: MossCG
 Main-Class: org.mossmc.mosscg.MossTwitterRandom.Main
