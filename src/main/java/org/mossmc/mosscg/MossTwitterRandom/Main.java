@@ -7,8 +7,7 @@ import java.nio.charset.Charset;
 import java.util.Random;
 
 import static org.mossmc.mosscg.MossTwitterRandom.Logger.*;
-import static org.mossmc.mosscg.MossTwitterRandom.ReadWebInfo.spiltLocalData;
-import static org.mossmc.mosscg.MossTwitterRandom.ReadWebInfo.spiltOnlineData;
+import static org.mossmc.mosscg.MossTwitterRandom.ReadWebInfo.*;
 
 public class Main {
     //动态参考地址：https://nitter.cz/mosscghere/status/1643917454782140416#m
@@ -23,8 +22,9 @@ public class Main {
     public static void run() {
         sendInfo("----------------------------------");
         sendInfo("请选择WEB文件获取方式~");
-        sendInfo("1.本地文件（推荐）");
+        sendInfo("1.本地文件（弃用）");
         sendInfo("2.在线获取");
+        sendInfo("3.纯ID（txt一行一个）");
         sendInfo("请输入选项前编号：");
         BasicInfo.fileGetType = readInput();
         String link,data;
@@ -68,6 +68,16 @@ public class Main {
                 }
                 spiltOnlineData(data);
                 break;
+            case "3":
+                sendInfo("----------------------------------");
+                sendInfo("此处需要输入txt文件路径呢~");
+                sendInfo("请注意是一行一个ID哦~");
+                sendInfo("嘛，注意大小写和文件后缀名哦~");
+                sendInfo("举个栗子：D:\\IDEA\\IdeaProjects\\MossTwitterRandom\\out\\artifacts\\MossTwitterRandom\\cj.txt");
+                sendInfo("请输入文件路径：");
+                link = readInput();
+                spiltIDData(link);
+                break;
             default:
                 break;
         }
@@ -96,8 +106,8 @@ public class Main {
         System.setProperty("http.keepAlive", "false");
     }
 
+    public static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in, Charset.defaultCharset()));
     public static String readInput() {
-        BufferedReader bufferedReader =new BufferedReader(new InputStreamReader(System.in, Charset.defaultCharset()));
         try {
             return bufferedReader.readLine();
         } catch (IOException e) {

@@ -1,9 +1,36 @@
 package org.mossmc.mosscg.MossTwitterRandom;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class ReadWebInfo {
     public static List<String> nameList;
+    public static void spiltIDData(String data) {
+        try {
+            nameList = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(Paths.get(data)), StandardCharsets.UTF_8));
+            while (true) {
+                String name = reader.readLine();
+                if (name==null||name.length()==0) break;
+                nameList.add(name);
+                Logger.sendInfo("解析到用户ID："+name);
+            }
+            Logger.sendInfo("正在去重......原评论数量为"+nameList.size());
+            Set<String> cacheSet = new HashSet<>(nameList);
+            nameList = new ArrayList<>(cacheSet);
+            Logger.sendInfo("解析完成！用户列表如下：");
+            Logger.sendInfo(nameList.toString());
+            Logger.sendInfo("解析到"+nameList.size()+"位用户！");
+        } catch (Exception e) {
+            Logger.sendException(e);
+        }
+    }
 
     public static void spiltLocalData(String data) {
         nameList = new ArrayList<>();
